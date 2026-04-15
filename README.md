@@ -1,2 +1,0 @@
-# Bettina
-guión interactivo
