@@ -3,76 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bettina Enhanced Audio System</title>
-    <script>
-        // Web Audio API setup
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-        // Function to load audio files
-        function loadSound(url) {
-            return new Promise((resolve, reject) => {
-                const audioElement = new Audio(url);
-                audioElement.oncanplaythrough = () => resolve(audioElement);
-                audioElement.onerror = reject;
-            });
-        }
-
-        let vintageRadio, soundEffects = {};
-        let dynamicVolume = 1.0;
-
-        async function initAudio() {
-            vintageRadio = await loadSound('vintage_radio_music.mp3');
-
-            // Load sound effects
-            soundEffects['swing'] = await loadSound('swing_impact.mp3');
-            soundEffects['gunshot'] = await loadSound('gunshot.mp3');
-            soundEffects['porcelain'] = await loadSound('breaking_porcelain.mp3');
-
-            // Play vintage radio
-            vintageRadio.loop = true;
-            vintageRadio.volume = dynamicVolume;
-            vintageRadio.play();
-        }
-
-        function adjustVolume(scene) {
-            // Adjust volume based on the current scene
-            if (scene === 'action') {
-                dynamicVolume = 0.8;
-            } else if (scene === 'quiet') {
-                dynamicVolume = 0.2;
-            } else {
-                dynamicVolume = 1.0;
-            }
-            vintageRadio.volume = dynamicVolume;
-        }
-
-        function triggerSoundEffect(effect) {
-            if (soundEffects[effect]) {
-                soundEffects[effect].currentTime = 0;
-                soundEffects[effect].play();
-            }
-        }
-
-        // Audio visualizer sync
-        // implement visualization code here
-
-        window.onload = initAudio;
-    </script>
+    <title>Bettina</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Bettina Interactive Narrative</h1>
-    <p>Experience layers of audio that enhance the narrative.</p>
-    <button onclick="triggerSoundEffect('swing')">Play Swing Effect</button>
-    <button onclick="triggerSoundEffect('gunshot')">Play Gunshot Effect</button>
-    <button onclick="triggerSoundEffect('porcelain')">Play Porcelain Breaking Effect</button>
+    <header>
+        <h1>Welcome to Bettina</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Home</h2>
+            <p>This is the home section with some introductory content.</p>
+            <audio controls id="background-audio">
+                <source src="audio/background.mp3" type="audio/mpeg">
+                Your browser does not support the audio tag.
+            </audio>
+        </section>
+        <section id="about">
+            <h2>About</h2>
+            <p>Complete narrative content goes here. Talk about Bettina's story and purpose.</p>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Contact information will be available here.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Bettina. All rights reserved.</p>
+    </footer>
     <script>
-        // Example for scene change simulation
-        setInterval(() => {
-            // Change scene every few seconds
-            const scenes = ['action', 'quiet', 'normal'];
-            const randomScene = scenes[Math.floor(Math.random() * scenes.length)];
-            adjustVolume(randomScene);
-        }, 5000);
+        const audio = document.getElementById('background-audio');
+        audio.onerror = function() {
+            console.error('Error loading audio file. Please check the file path or format.');
+            alert('Audio could not be loaded.');
+        };
     </script>
 </body>
 </html>
