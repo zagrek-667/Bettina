@@ -1,49 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bettina</title>
+    <title>Bettina - Narrativa Interactiva</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to Bettina</h1>
+        <h1>🎭 Bettina - La Historia Interactiva</h1>
         <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul id="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#acto1">Acto I</a></li>
+                <li><a href="#acto2">Acto II</a></li>
+                <li><a href="#acto3">Acto III</a></li>
+                <li><a href="#creditos">Créditos</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <section id="home">
-            <h2>Home</h2>
-            <p>This is the home section with some introductory content.</p>
-            <audio controls id="background-audio">
-                <source src="audio/background.mp3" type="audio/mpeg">
-                Your browser does not support the audio tag.
+        <!-- INICIO -->
+        <section id="inicio" class="scene">
+            <h2>Prólogo</h2>
+            <p>En una noche de 1927, la ciudad duerme bajo las luces del jazz. Bettina, una joven pianista de cabaret, se prepara para su última actuación antes de desaparecer para siempre...</p>
+            <button onclick="playSound('swing'); goToScene('acto1')">Comenzar la historia →</button>
+            <audio id="music-inicio" preload="auto">
+                <source src="audio/vintage_radio.mp3" type="audio/mpeg">
             </audio>
         </section>
-        <section id="about">
-            <h2>About</h2>
-            <p>Complete narrative content goes here. Talk about Bettina's story and purpose.</p>
+
+        <!-- ACTO I -->
+        <section id="acto1" class="scene hidden">
+            <h2>Acto I: El Cabaret Nocturno</h2>
+            <p>Las luces dimmed del escenario iluminan a Bettina. Sus dedos vuelan sobre las teclas del piano mientras la orquesta toca una melodía electrizante. El público está hipnotizado. En la primera fila, un misterioso caballero la observa intensamente.</p>
+            <p><em>"¿Quién es ese hombre? ¿Por qué su mirada es tan penetrante?"</em></p>
+            <div class="choices">
+                <button onclick="playSound('gunshot'); goToScene('acto2')">🔫 Algo peligroso está a punto de ocurrir</button>
+                <button onclick="playSound('swing'); goToScene('acto2')">💃 Continuar con el espectáculo</button>
+            </div>
+            <audio id="music-acto1" preload="auto">
+                <source src="audio/swing_impact.mp3" type="audio/mpeg">
+            </audio>
         </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Contact information will be available here.</p>
+
+        <!-- ACTO II -->
+        <section id="acto2" class="scene hidden">
+            <h2>Acto II: El Encuentro</h2>
+            <p>Al terminar la actuación, Bettina desciende del escenario. El caballero misterioso la espera cerca del camerino. Sus ojos oscuros revelan secretos que nadie debería saber.</p>
+            <p><strong>"Te he estado buscando, Bettina. Es hora de que sepas la verdad sobre tu pasado."</strong></p>
+            <p>Su voz es firme pero cargada de emoción. Ella tiembla. ¿Cuántos años ha estado huyendo de esta verdad?</p>
+            <div class="choices">
+                <button onclick="playSound('porcelain'); goToScene('acto3')">🖤 Confrontar la verdad sin miedo</button>
+                <button onclick="playSound('gunshot'); goToScene('acto3')">🏃 Intentar escapar nuevamente</button>
+            </div>
+            <audio id="music-acto2" preload="auto">
+                <source src="audio/gunshot.mp3" type="audio/mpeg">
+            </audio>
+        </section>
+
+        <!-- ACTO III -->
+        <section id="acto3" class="scene hidden">
+            <h2>Acto III: La Revelación</h2>
+            <p>Las palabras caen como piedras. Bettina descubre que el hombre es su hermano, separado de ella durante la Gran Depresión. Ambos fueron abandonados en diferentes orfanatos, creyendo estar solos en el mundo.</p>
+            <p>Años de búsqueda lo llevaron a ella. La música de Bettina lo guió a través de toda América.</p>
+            <p class="ending">✨ <em>"Nunca estuviste sola. Tu música siempre fue un faro en la oscuridad."</em></p>
+            <div class="choices">
+                <button onclick="goToScene('creditos')">📖 Ver créditos</button>
+                <button onclick="location.reload()">🔄 Reiniciar historia</button>
+            </div>
+            <audio id="music-acto3" preload="auto">
+                <source src="audio/breaking_porcelain.mp3" type="audio/mpeg">
+            </audio>
+        </section>
+
+        <!-- CRÉDITOS -->
+        <section id="creditos" class="scene hidden">
+            <h2>🎬 Créditos</h2>
+            <div class="credits">
+                <p><strong>Bettina</strong></p>
+                <p>Una historia de misterio, familia y redención</p>
+                <hr>
+                <p>Escritura: Narrativa Interactiva</p>
+                <p>Sonido: Efectos de Audio Vintage</p>
+                <p>Dirección: Experimento Narrativo 2026</p>
+                <hr>
+                <p>🎵 Música de fondo: vintage_radio.mp3</p>
+                <p>🔊 Efectos de sonido sincronizados con la narrativa</p>
+                <p>Gracias por experimentar esta historia.</p>
+                <button onclick="location.href='#inicio'">← Volver al inicio</button>
+            </div>
         </section>
     </main>
+
     <footer>
-        <p>&copy; 2026 Bettina. All rights reserved.</p>
+        <p>&copy; 2026 Bettina. Una experiencia narrativa interactiva.</p>
+        <p id="current-scene">Estado: Cargando...</p>
     </footer>
+
     <script>
-        const audio = document.getElementById('background-audio');
-        audio.onerror = function() {
-            console.error('Error loading audio file. Please check the file path or format.');
-            alert('Audio could not be loaded.');
+        // Audio management
+        let currentAudio = null;
+        const soundEffects = {
+            'swing': 'audio/swing_impact.mp3',
+            'gunshot': 'audio/gunshot.mp3',
+            'porcelain': 'audio/breaking_porcelain.mp3'
         };
+
+        function playSound(effectType) {
+            if (soundEffects[effectType]) {
+                const audio = new Audio(soundEffects[effectType]);
+                audio.play().catch(err => console.log('Audio play error:', err));
+            }
+        }
+
+        // Scene navigation
+        function goToScene(sceneId) {
+            // Hide all scenes
+            document.querySelectorAll('.scene').forEach(scene => {
+                scene.classList.add('hidden');
+            });
+            
+            // Show target scene
+            const targetScene = document.getElementById(sceneId);
+            if (targetScene) {
+                targetScene.classList.remove('hidden');
+                window.scrollTo(0, 0);
+                updateSceneDisplay(sceneId);
+            }
+        }
+
+        // Update footer display
+        function updateSceneDisplay(sceneId) {
+            const sceneTitle = document.getElementById(sceneId)?.querySelector('h2')?.textContent || sceneId;
+            document.getElementById('current-scene').textContent = `Estado: ${sceneTitle}`;
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            goToScene('inicio');
+            console.log('🎭 Bettina narrativa cargada correctamente');
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                goToScene(targetId);
+            });
+        });
     </script>
 </body>
 </html>
